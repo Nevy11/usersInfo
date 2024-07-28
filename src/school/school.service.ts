@@ -20,14 +20,26 @@ export class SchoolService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} school`;
+    const todoing = this.schoolRepository.findOne({
+      where: { id },
+    });
+
+    return todoing;
   }
 
-  update(id: number, updateSchoolDto: UpdateSchoolDto) {
-    return `This action updates a #${id} school`;
+  async update(id: number, createDto: CreateSchoolDto) {
+    const todo = await this.schoolRepository.findOne({
+      where: { id },
+    });
+    Object.assign(todo, createDto);
+    return this.schoolRepository.save(todo);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} school`;
+  async remove(id: number) {
+    const todo = await this.schoolRepository.findOne({
+      where: { id },
+    });
+    // return this.schoolRepository.findOneBy();
+    return this.schoolRepository.remove(todo);
   }
 }

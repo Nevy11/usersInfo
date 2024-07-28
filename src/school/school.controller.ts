@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Put,
 } from '@nestjs/common';
 import { SchoolService } from './school.service';
 import { CreateSchoolDto } from './dto/create-school.dto';
@@ -26,17 +27,17 @@ export class SchoolController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.schoolService.findOne(+id);
+  findOne(@Param('id') id: number) {
+    return this.schoolService.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateSchoolDto: UpdateSchoolDto) {
-    return this.schoolService.update(+id, updateSchoolDto);
+  @Put(':id')
+  update(@Param('id') id: string, @Body() createDto: CreateSchoolDto) {
+    return this.schoolService.update(+id, createDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.schoolService.remove(+id);
+  remove(@Param('id') id: number) {
+    return this.schoolService.remove(id);
   }
 }
